@@ -1,0 +1,1826 @@
+{
+	"info": {
+		"_postman_id": "62b993c0-778b-4d2d-a342-6bf28d9a4d91",
+		"name": "TAEyone",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27290247"
+	},
+	"item": [
+		{
+			"name": "Ordonnance",
+			"item": [
+				{
+					"name": "intervalle-prise-medicament-prescrit",
+					"item": [
+						{
+							"name": "ajout-intervalle-prise-medicament-prescrit",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"var jsonData = pm.response.json();\r",
+											"if(pm.response.code==200)\r",
+											"{\r",
+											"    pm.environment.set(\"IntervalleId\", jsonData.identifier);\r",
+											"}\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"MATIN-SOIR\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/patient-file/sapi/rest/v1/prescription-drug-reccurences",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"patient-file",
+										"sapi",
+										"rest",
+										"v1",
+										"prescription-drug-reccurences"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "ajout-intervalle-prise-medicament-prescrit",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"Trois fois par semaine\"\n}\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:9494/patient-file/sapi/rest/v1/prescription-drug-reccurences",
+											"host": [
+												"localhost"
+											],
+											"port": "9494",
+											"path": [
+												"patient-file",
+												"sapi",
+												"rest",
+												"v1",
+												"prescription-drug-reccurences"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "POST, GET, OPTIONS, DELETE, PUT, PATCH"
+										},
+										{
+											"key": "Access-Control-Max-Age",
+											"value": "3600"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "authorization,dsname,origin,x-requested-with,access-control-request-headers,content-type,access-control-request-method,accept, apikey"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json;charset=UTF-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 31 Oct 2024 01:01:30 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"identifier\": 8755,\n    \"disable\": false,\n    \"name\": \"Trois fois par semaine\",\n    \"new\": false\n}"
+								}
+							]
+						},
+						{
+							"name": "modfication-intervalle-prise-medicament-prescrit",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"modification unité de mesure\", function(){\r",
+											"    pm.response.to.have.status(200);\r",
+											"})\r",
+											"if(pm.response.code == 200){\r",
+											"    pm.environment.get(\"IntervalleId\");\r",
+											"}"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\n        \"op\": \"replace\",\n        \"path\": \"/MATIN-SOIR\",\n        \"value\": \"Nouveau nom\"\n    }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/admin/patient-file/sapi/rest/v1/prescription-drug-reccurences/{{IntervalleId}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"admin",
+										"patient-file",
+										"sapi",
+										"rest",
+										"v1",
+										"prescription-drug-reccurences",
+										"{{IntervalleId}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "modfication-intervalle-prise-medicament-prescrit",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json-patch+json",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"Every Night\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:9494/patient-file/sapi/rest/v1/prescription-drug-reccurences/6151",
+											"host": [
+												"localhost"
+											],
+											"port": "9494",
+											"path": [
+												"patient-file",
+												"sapi",
+												"rest",
+												"v1",
+												"prescription-drug-reccurences",
+												"6151"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "POST, GET, OPTIONS, DELETE, PUT, PATCH"
+										},
+										{
+											"key": "Access-Control-Max-Age",
+											"value": "3600"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "authorization,dsname,origin,x-requested-with,access-control-request-headers,content-type,access-control-request-method,accept, apikey"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json;charset=UTF-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 31 Oct 2024 00:59:38 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"identifier\": 6151,\n    \"disable\": false,\n    \"name\": \"Every Night\",\n    \"new\": false\n}"
+								}
+							]
+						},
+						{
+							"name": "un-intervalle-prise-medicament-prescrit",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/patient-file/sapi/rest/v1/prescription-drug-reccurences/{{IntervalleId}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"patient-file",
+										"sapi",
+										"rest",
+										"v1",
+										"prescription-drug-reccurences",
+										"{{IntervalleId}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "un-intervalle-prise-medicament-prescrit",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:9494/patient-file/sapi/rest/v1/prescription-drug-reccurences/21551",
+											"host": [
+												"localhost"
+											],
+											"port": "9494",
+											"path": [
+												"patient-file",
+												"sapi",
+												"rest",
+												"v1",
+												"prescription-drug-reccurences",
+												"21551"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "POST, GET, OPTIONS, DELETE, PUT, PATCH"
+										},
+										{
+											"key": "Access-Control-Max-Age",
+											"value": "3600"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "authorization,dsname,origin,x-requested-with,access-control-request-headers,content-type,access-control-request-method,accept, apikey"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json;charset=UTF-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 31 Oct 2024 00:47:32 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"identifier\": 21551,\n    \"disable\": false,\n    \"name\": \"2\",\n    \"new\": false\n}"
+								}
+							]
+						},
+						{
+							"name": "liste-intervalle-prise-medicament-prescrit",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/patient-file/sapi/rest/v1/prescription-drug-reccurences",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"patient-file",
+										"sapi",
+										"rest",
+										"v1",
+										"prescription-drug-reccurences"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "liste-intervalle-prise-medicament-prescrit",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:9494/patient-file/sapi/rest/v1/prescription-drug-reccurences",
+											"host": [
+												"localhost"
+											],
+											"port": "9494",
+											"path": [
+												"patient-file",
+												"sapi",
+												"rest",
+												"v1",
+												"prescription-drug-reccurences"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "POST, GET, OPTIONS, DELETE, PUT, PATCH"
+										},
+										{
+											"key": "Access-Control-Max-Age",
+											"value": "3600"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "authorization,dsname,origin,x-requested-with,access-control-request-headers,content-type,access-control-request-method,accept, apikey"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json;charset=UTF-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 31 Oct 2024 01:02:42 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"identifier\": 8755,\n        \"disable\": false,\n        \"name\": \"Trois fois par semaine\",\n        \"new\": false\n    },\n    {\n        \"identifier\": 8754,\n        \"disable\": false,\n        \"name\": \"Avant chaque repas\",\n        \"new\": false\n    },\n    {\n        \"identifier\": 8753,\n        \"disable\": false,\n        \"name\": \"Toutes les 4 heures si nécessaire\",\n        \"new\": false\n    },\n    {\n        \"identifier\": 8752,\n        \"disable\": false,\n        \"name\": \"Toutes les 8 heures\",\n        \"new\": false\n    },\n    {\n        \"identifier\": 8751,\n        \"disable\": false,\n        \"name\": \"Chaque jour\",\n        \"new\": false\n    },\n    {\n        \"identifier\": 6152,\n        \"disable\": false,\n        \"name\": \"Matin/soir\",\n        \"new\": false\n    },\n    {\n        \"identifier\": 6151,\n        \"disable\": false,\n        \"name\": \"Every Night\",\n        \"new\": false\n    },\n    {\n        \"identifier\": 5901,\n        \"disable\": false,\n        \"name\": \"3\",\n        \"new\": false\n    },\n    {\n        \"identifier\": 1301,\n        \"disable\": false,\n        \"name\": \"Matin/Midi/Soir\",\n        \"new\": false\n    }\n]"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "type-duree-prescription",
+					"item": [
+						{
+							"name": "ajout-type-duree-prescription",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/patient-file/sapi/rest/v1/prescription-duration-type",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"patient-file",
+										"sapi",
+										"rest",
+										"v1",
+										"prescription-duration-type"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "ajout-type-duree-prescription",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"A Vie\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:9494/patient-file/sapi/rest/v1/prescription-duration-type",
+											"host": [
+												"localhost"
+											],
+											"port": "9494",
+											"path": [
+												"patient-file",
+												"sapi",
+												"rest",
+												"v1",
+												"prescription-duration-type"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "POST, GET, OPTIONS, DELETE, PUT, PATCH"
+										},
+										{
+											"key": "Access-Control-Max-Age",
+											"value": "3600"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "authorization,dsname,origin,x-requested-with,access-control-request-headers,content-type,access-control-request-method,accept, apikey"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json;charset=UTF-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 31 Oct 2024 01:16:22 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"identifier\": 8851,\n    \"disable\": false,\n    \"name\": \"A Vie\",\n    \"new\": false\n}"
+								}
+							]
+						},
+						{
+							"name": "modification-type-duree-prescription",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/patient-file/sapi/rest/v1/prescription-duration-type/{{dureTypeId}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"patient-file",
+										"sapi",
+										"rest",
+										"v1",
+										"prescription-duration-type",
+										"{{dureTypeId}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "modification-type-duree-prescription",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"For Life\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:9494/patient-file/sapi/rest/v1/prescription-duration-type/8851",
+											"host": [
+												"localhost"
+											],
+											"port": "9494",
+											"path": [
+												"patient-file",
+												"sapi",
+												"rest",
+												"v1",
+												"prescription-duration-type",
+												"8851"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "POST, GET, OPTIONS, DELETE, PUT, PATCH"
+										},
+										{
+											"key": "Access-Control-Max-Age",
+											"value": "3600"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "authorization,dsname,origin,x-requested-with,access-control-request-headers,content-type,access-control-request-method,accept, apikey"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json;charset=UTF-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 31 Oct 2024 01:17:42 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"identifier\": 8851,\n    \"disable\": false,\n    \"name\": \"For Life\",\n    \"new\": false\n}"
+								}
+							]
+						},
+						{
+							"name": "un-type-duree-prescription",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/patient-file/sapi/rest/v1/prescription-duration-type",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"patient-file",
+										"sapi",
+										"rest",
+										"v1",
+										"prescription-duration-type"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "un-type-duree-prescription",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:9494/patient-file/sapi/rest/v1/prescription-duration-type/5951",
+											"host": [
+												"localhost"
+											],
+											"port": "9494",
+											"path": [
+												"patient-file",
+												"sapi",
+												"rest",
+												"v1",
+												"prescription-duration-type",
+												"5951"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "POST, GET, OPTIONS, DELETE, PUT, PATCH"
+										},
+										{
+											"key": "Access-Control-Max-Age",
+											"value": "3600"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "authorization,dsname,origin,x-requested-with,access-control-request-headers,content-type,access-control-request-method,accept, apikey"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json;charset=UTF-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 31 Oct 2024 01:15:38 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"identifier\": 5951,\n    \"disable\": false,\n    \"name\": \"Jour\",\n    \"new\": false\n}"
+								}
+							]
+						},
+						{
+							"name": "liste-type-duree-prescription",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/patient-file/sapi/rest/v1/prescription-duration-type",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"patient-file",
+										"sapi",
+										"rest",
+										"v1",
+										"prescription-duration-type"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "liste-type-duree-prescription",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:9494/patient-file/sapi/rest/v1/prescription-duration-type",
+											"host": [
+												"localhost"
+											],
+											"port": "9494",
+											"path": [
+												"patient-file",
+												"sapi",
+												"rest",
+												"v1",
+												"prescription-duration-type"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "POST, GET, OPTIONS, DELETE, PUT, PATCH"
+										},
+										{
+											"key": "Access-Control-Max-Age",
+											"value": "3600"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "authorization,dsname,origin,x-requested-with,access-control-request-headers,content-type,access-control-request-method,accept, apikey"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json;charset=UTF-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 31 Oct 2024 01:14:57 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"identifier\": 5951,\n        \"disable\": false,\n        \"name\": \"Jour\",\n        \"new\": false\n    },\n    {\n        \"identifier\": 5802,\n        \"disable\": false,\n        \"name\": \"Semaine\",\n        \"new\": false\n    },\n    {\n        \"identifier\": 1301,\n        \"disable\": false,\n        \"name\": \"Mois\",\n        \"new\": false\n    }\n]"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "unite-mesure-quantite",
+					"item": [
+						{
+							"name": "ajout-unite-mesure-quantite",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"var jsonData = pm.response.json();\r",
+											"if(pm.response.code==200)\r",
+											"{\r",
+											"    pm.environment.set(\"UniteId\", jsonData.identifier);\r",
+											"}\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"7{{$randomInt}} mL\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/patient-file/sapi/rest/v1/prescription-qtity-units",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"patient-file",
+										"sapi",
+										"rest",
+										"v1",
+										"prescription-qtity-units"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "ajout-unite-mesure-quantite",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"5 mL\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:9494/patient-file/sapi/rest/v1/prescription-qtity-units",
+											"host": [
+												"localhost"
+											],
+											"port": "9494",
+											"path": [
+												"patient-file",
+												"sapi",
+												"rest",
+												"v1",
+												"prescription-qtity-units"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "POST, GET, OPTIONS, DELETE, PUT, PATCH"
+										},
+										{
+											"key": "Access-Control-Max-Age",
+											"value": "3600"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "authorization,dsname,origin,x-requested-with,access-control-request-headers,content-type,access-control-request-method,accept, apikey"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json;charset=UTF-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 31 Oct 2024 01:29:51 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"identifier\": 8851,\n    \"disable\": false,\n    \"name\": \"5 mL\",\n    \"new\": false\n}"
+								}
+							]
+						},
+						{
+							"name": "modification-unite-mesure-quantite",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"modification unité de mesure\", function(){\r",
+											"    pm.response.to.have.status(200);\r",
+											"})\r",
+											"if(pm.response.code == 200){\r",
+											"    pm.environment.get(\"UniteId\");\r",
+											"}"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"2 gouttes\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/patient-file/sapi/rest/v1/prescription-qtity-units/{{UniteId}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"patient-file",
+										"sapi",
+										"rest",
+										"v1",
+										"prescription-qtity-units",
+										"{{UniteId}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "modification-unite-mesure-quantite",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"2 gouttes\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:9494/patient-file/sapi/rest/v1/prescription-qtity-units/21701",
+											"host": [
+												"localhost"
+											],
+											"port": "9494",
+											"path": [
+												"patient-file",
+												"sapi",
+												"rest",
+												"v1",
+												"prescription-qtity-units",
+												"21701"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "POST, GET, OPTIONS, DELETE, PUT, PATCH"
+										},
+										{
+											"key": "Access-Control-Max-Age",
+											"value": "3600"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "authorization,dsname,origin,x-requested-with,access-control-request-headers,content-type,access-control-request-method,accept, apikey"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json;charset=UTF-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 31 Oct 2024 01:32:27 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"identifier\": 21701,\n    \"disable\": false,\n    \"name\": \"2 gouttes\",\n    \"new\": false\n}"
+								}
+							]
+						},
+						{
+							"name": "un-unites-mesure-quantite",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/patient-file/sapi/rest/v1/prescription-qtity-units/{{UniteId}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"patient-file",
+										"sapi",
+										"rest",
+										"v1",
+										"prescription-qtity-units",
+										"{{UniteId}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "un-unite-mesure-quantite",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:9494/patient-file/sapi/rest/v1/prescription-qtity-units/21701",
+											"host": [
+												"localhost"
+											],
+											"port": "9494",
+											"path": [
+												"patient-file",
+												"sapi",
+												"rest",
+												"v1",
+												"prescription-qtity-units",
+												"21701"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "POST, GET, OPTIONS, DELETE, PUT, PATCH"
+										},
+										{
+											"key": "Access-Control-Max-Age",
+											"value": "3600"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "authorization,dsname,origin,x-requested-with,access-control-request-headers,content-type,access-control-request-method,accept, apikey"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json;charset=UTF-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 31 Oct 2024 01:29:09 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"identifier\": 21701,\n    \"disable\": false,\n    \"name\": \"2\",\n    \"new\": false\n}"
+								}
+							]
+						},
+						{
+							"name": "liste-unite-mesure-quantite",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/patient-file/sapi/rest/v1/prescription-qtity-units",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"patient-file",
+										"sapi",
+										"rest",
+										"v1",
+										"prescription-qtity-units"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "liste-unite-mesure-quantite",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:9494/patient-file/sapi/rest/v1/prescription-qtity-units",
+											"host": [
+												"localhost"
+											],
+											"port": "9494",
+											"path": [
+												"patient-file",
+												"sapi",
+												"rest",
+												"v1",
+												"prescription-qtity-units"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "POST, GET, OPTIONS, DELETE, PUT, PATCH"
+										},
+										{
+											"key": "Access-Control-Max-Age",
+											"value": "3600"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "authorization,dsname,origin,x-requested-with,access-control-request-headers,content-type,access-control-request-method,accept, apikey"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json;charset=UTF-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 31 Oct 2024 01:33:38 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"identifier\": 8851,\n        \"disable\": false,\n        \"name\": \"5 mL\",\n        \"new\": false\n    },\n    {\n        \"identifier\": 21701,\n        \"disable\": false,\n        \"name\": \"2 gouttes\",\n        \"new\": false\n    },\n    {\n        \"identifier\": 4053,\n        \"disable\": false,\n        \"name\": \"Comprimé\",\n        \"new\": false\n    },\n    {\n        \"identifier\": 1451,\n        \"disable\": false,\n        \"name\": \"Boites\",\n        \"new\": false\n    },\n    {\n        \"identifier\": 1301,\n        \"disable\": false,\n        \"name\": \"Comprimés\",\n        \"new\": false\n    }\n]"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "referentiel-medicament",
+					"item": [
+						{
+							"name": "ajout-referentiel-medicament",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"var jsonData = pm.response.json();\r",
+											"if(pm.response.code==200)\r",
+											"{\r",
+											"    pm.environment.set(\"referentialId\", jsonData.identifier);\r",
+											"}\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"Name\": \"Azoptest2\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://develop.gateway.eyone.net/patient-file/sapi/rest/v1/referential-medications",
+									"protocol": "http",
+									"host": [
+										"develop",
+										"gateway",
+										"eyone",
+										"net"
+									],
+									"path": [
+										"patient-file",
+										"sapi",
+										"rest",
+										"v1",
+										"referential-medications"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "ajout-referentiel-medicament",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"drugName\": \"Azopt\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:9494/patient-file/sapi/rest/v1/referential-medications",
+											"host": [
+												"localhost"
+											],
+											"port": "9494",
+											"path": [
+												"patient-file",
+												"sapi",
+												"rest",
+												"v1",
+												"referential-medications"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "POST, GET, OPTIONS, DELETE, PUT, PATCH"
+										},
+										{
+											"key": "Access-Control-Max-Age",
+											"value": "3600"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "authorization,dsname,origin,x-requested-with,access-control-request-headers,content-type,access-control-request-method,accept, apikey"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json;charset=UTF-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 31 Oct 2024 02:20:25 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"identifier\": 9652,\n    \"disable\": false,\n    \"drugName\": \"Azopt\",\n    \"new\": false\n}"
+								}
+							]
+						},
+						{
+							"name": "modification-referentiel-medicament",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"modification unité de mesure\", function(){\r",
+											"    pm.response.to.have.status(200);\r",
+											"})\r",
+											"if(pm.response.code == 200){\r",
+											"    pm.environment.get(\"referentialId\");\r",
+											"}"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"drugName\": \"5 gouttes\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/patient-file/sapi/rest/v1/referential-medications/{{referentialId}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"patient-file",
+										"sapi",
+										"rest",
+										"v1",
+										"referential-medications",
+										"{{referentialId}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "modification-referentiel-medicament",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"drugName\": \"Carteol\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:9494/patient-file/sapi/rest/v1/referential-medications/9651",
+											"host": [
+												"localhost"
+											],
+											"port": "9494",
+											"path": [
+												"patient-file",
+												"sapi",
+												"rest",
+												"v1",
+												"referential-medications",
+												"9651"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "POST, GET, OPTIONS, DELETE, PUT, PATCH"
+										},
+										{
+											"key": "Access-Control-Max-Age",
+											"value": "3600"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "authorization,dsname,origin,x-requested-with,access-control-request-headers,content-type,access-control-request-method,accept, apikey"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json;charset=UTF-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 31 Oct 2024 02:18:11 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"identifier\": 9651,\n    \"disable\": false,\n    \"drugName\": \"Carteol\",\n    \"new\": false\n}"
+								}
+							]
+						},
+						{
+							"name": "liste-nom-referentiel-medicament",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/patient-file/sapi/rest/v1/referential-medications/all",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"patient-file",
+										"sapi",
+										"rest",
+										"v1",
+										"referential-medications",
+										"all"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "liste-nom-referentiel-medicament",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:9494/patient-file/sapi/rest/v1/referential-medications/all",
+											"host": [
+												"localhost"
+											],
+											"port": "9494",
+											"path": [
+												"patient-file",
+												"sapi",
+												"rest",
+												"v1",
+												"referential-medications",
+												"all"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "POST, GET, OPTIONS, DELETE, PUT, PATCH"
+										},
+										{
+											"key": "Access-Control-Max-Age",
+											"value": "3600"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "authorization,dsname,origin,x-requested-with,access-control-request-headers,content-type,access-control-request-method,accept, apikey"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json;charset=UTF-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 31 Oct 2024 02:18:23 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    \"Carteol\",\n    \"Eucarbon\",\n    \"Gaspral 20mg\",\n    \"Cardox 10\",\n    \"Aspirine cardio\",\n    \"Aspirine\"\n]"
+								}
+							]
+						},
+						{
+							"name": "un-referentiel-medicament",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/patient-file/sapi/rest/v1/referential-medications/{{referentialId}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"patient-file",
+										"sapi",
+										"rest",
+										"v1",
+										"referential-medications",
+										"{{referentialId}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "un-referentiel-medicament",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:9494/patient-file/sapi/rest/v1/referential-medications/6644",
+											"host": [
+												"localhost"
+											],
+											"port": "9494",
+											"path": [
+												"patient-file",
+												"sapi",
+												"rest",
+												"v1",
+												"referential-medications",
+												"6644"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "POST, GET, OPTIONS, DELETE, PUT, PATCH"
+										},
+										{
+											"key": "Access-Control-Max-Age",
+											"value": "3600"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "authorization,dsname,origin,x-requested-with,access-control-request-headers,content-type,access-control-request-method,accept, apikey"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json;charset=UTF-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 31 Oct 2024 02:20:08 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"identifier\": 6644,\n    \"disable\": false,\n    \"organism\": {\n        \"identifier\": 51,\n        \"disable\": false,\n        \"name\": \"HOPITAL ADMIN\",\n        \"new\": false\n    },\n    \"drugName\": \"Eucarbon\",\n    \"new\": false\n}"
+								}
+							]
+						},
+						{
+							"name": "liste-referentiel-medicament",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/patient-file/sapi/rest/v1/referential-medications",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"patient-file",
+										"sapi",
+										"rest",
+										"v1",
+										"referential-medications"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "liste-referentiel-medicament",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:9494/patient-file/sapi/rest/v1/referential-medications",
+											"host": [
+												"localhost"
+											],
+											"port": "9494",
+											"path": [
+												"patient-file",
+												"sapi",
+												"rest",
+												"v1",
+												"referential-medications"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "POST, GET, OPTIONS, DELETE, PUT, PATCH"
+										},
+										{
+											"key": "Access-Control-Max-Age",
+											"value": "3600"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "authorization,dsname,origin,x-requested-with,access-control-request-headers,content-type,access-control-request-method,accept, apikey"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json;charset=UTF-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 31 Oct 2024 02:19:14 GMT"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"identifier\": 9651,\n        \"disable\": false,\n        \"drugName\": \"Carteol\",\n        \"new\": false\n    },\n    {\n        \"identifier\": 6644,\n        \"disable\": false,\n        \"organism\": {\n            \"identifier\": 51,\n            \"disable\": false,\n            \"name\": \"HOPITAL ADMIN\",\n            \"new\": false\n        },\n        \"drugName\": \"Eucarbon\",\n        \"new\": false\n    },\n    {\n        \"identifier\": 6643,\n        \"disable\": false,\n        \"organism\": {\n            \"identifier\": 51,\n            \"disable\": false,\n            \"name\": \"HOPITAL ADMIN\",\n            \"new\": false\n        },\n        \"drugName\": \"Gaspral 20mg\",\n        \"new\": false\n    },\n    {\n        \"identifier\": 6642,\n        \"disable\": false,\n        \"organism\": {\n            \"identifier\": 51,\n            \"disable\": false,\n            \"name\": \"HOPITAL ADMIN\",\n            \"new\": false\n        },\n        \"drugName\": \"Cardox 10\",\n        \"new\": false\n    },\n    {\n        \"identifier\": 6641,\n        \"disable\": false,\n        \"organism\": {\n            \"identifier\": 51,\n            \"disable\": false,\n            \"name\": \"HOPITAL ADMIN\",\n            \"new\": false\n        },\n        \"drugName\": \"Aspirine cardio\",\n        \"new\": false\n    },\n    {\n        \"identifier\": 1451,\n        \"disable\": false,\n        \"organism\": {\n            \"identifier\": 51,\n            \"disable\": false,\n            \"name\": \"HOPITAL ADMIN\",\n            \"new\": false\n        },\n        \"drugName\": \"Aspirine\",\n        \"new\": false\n    }\n]"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "delete-referentiel-medicament",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/patient-file/sapi/rest/v1/prescription-qtity-units/{{referentialId}}",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"patient-file",
+								"sapi",
+								"rest",
+								"v1",
+								"prescription-qtity-units",
+								"{{referentialId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-intervalle-prise-medicament-prescrit",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Une fois par mois\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/patient-file/sapi/rest/v1/prescription-drug-reccurences/2102",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"patient-file",
+								"sapi",
+								"rest",
+								"v1",
+								"prescription-drug-reccurences",
+								"2102"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-type-duree-prescription",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/patient-file/sapi/rest/v1/prescription-duration-type/{{dureTypeId}}",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"patient-file",
+								"sapi",
+								"rest",
+								"v1",
+								"prescription-duration-type",
+								"{{dureTypeId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-unite-mesure-quantite",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/patient-file/sapi/rest/v1/prescription-qtity-units/{{UniteId}}",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"patient-file",
+								"sapi",
+								"rest",
+								"v1",
+								"prescription-qtity-units",
+								"{{UniteId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "saveFinanceParamsInfo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"organismId\": {{organismId}},\r\n    \"defaultRelatedOrganism\": {\r\n        \"identifier\": {{organismId}},\r\n        \"name\": \"{{defaultOrganismName}}\"\r\n    },\r\n    \"defaultJournalType\" : \"CAISSE_JOURNAL\",\r\n    \"defaultPaymentType\": {\r\n        \"paymentTypeId\": {{paymentTypeId}},\r\n        \"paymentTypeName\": \"{{paymentTypeName}}\"\r\n    },\r\n    \"defaultCaisse\": {\r\n        \"caisseId\": {{caisseId}},\r\n        \"caisseName\": \"{{caisseName}}\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{hostUrl}}/sapi/rest/v1/currentOrganisms/billing-infos",
+					"host": [
+						"{{hostUrl}}"
+					],
+					"path": [
+						"sapi",
+						"rest",
+						"v1",
+						"currentOrganisms",
+						"billing-infos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://develop.gateway.eyone.net/medical-billing/sapi/rest/v1/prestations?offset=0&Limit=10&search=&startDate=07/10/2024%2000:00&endDate=07/10/2024%2023:59&medicalActCategory=ALL",
+					"protocol": "https",
+					"host": [
+						"develop",
+						"gateway",
+						"eyone",
+						"net"
+					],
+					"path": [
+						"medical-billing",
+						"sapi",
+						"rest",
+						"v1",
+						"prestations"
+					],
+					"query": [
+						{
+							"key": "offset",
+							"value": "0"
+						},
+						{
+							"key": "Limit",
+							"value": "10"
+						},
+						{
+							"key": "search",
+							"value": ""
+						},
+						{
+							"key": "startDate",
+							"value": "07/10/2024%2000:00"
+						},
+						{
+							"key": "endDate",
+							"value": "07/10/2024%2023:59"
+						},
+						{
+							"key": "medicalActCategory",
+							"value": "ALL"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
